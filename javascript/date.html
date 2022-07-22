@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<!--
+
+Date()
+
+getFullYear()
+getMonth()
+getDate()
+
+getHours()
+getMinutes()
+getSeconds()
+-->
+<p id="dategmt"></p>
+
+<p id="date"></p>
+
+<p id="time"></p>
+
+<script>
+var today = new Date();
+
+var date = (today.getDate())+'-'+ (today.getMonth()+1) +'-'+(today.getFullYear());
+
+var time = (today.getHours()+1) + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+document.getElementById("dategmt").innerHTML = today;
+document.getElementById("date").innerHTML = date;
+document.getElementById("time").innerHTML = time;
+
+
+</script>
+
+</body>
+</html>
+
+

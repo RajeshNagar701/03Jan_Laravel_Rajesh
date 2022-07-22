@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script>
+	// function of javasript
+	function myfunction()
+	{
+		document.getElementById('raj').innerHTML="This is all HTML EVENTS";	
+	}
+</script>
+</head>
+<body>
+<input type="submit" name="submit" value="onclick here"  onclick="myfunction()">  <!-- onclick HTML EVENT-->
+<input type="submit" name="submit" value="ondblclick here" ondblclick="myfunction()">  <!-- onclick HTML EVENT-->
+<input type="submit" name="submit" value="onmouseover here" onmouseover="myfunction()">  <!-- onclick HTML EVENT-->
+<input type="submit" name="submit" value="onmouseout here" onmouseout="myfunction()">  <!-- onclick HTML EVENT-->
+<!--
+<input type="submit" name="submit" value="click here" 
+onblur="", 
+onchange="", 
+onclick="", 
+ondblclick="", 
+onfocus="", 
+onkeydown="", 
+onkeypress="", 
+onkeyup="", 
+onmousedown="", 
+onmousemove="", 
+onmouseout="", 
+onmouseover="", 
+onmouseup="">  
+
+<!-- onclick HTML EVENT-->
+<h1 id="raj"> rajesh</h1>
+
+
+
+<script>
+	// function of javasript
+	function setfunc()
+	{
+		document.getElementById('input').style.backgroundColor="red";
+		document.getElementById('input').style.color="white";
+		document.getElementById('input').style.textTransform="uppercase";
+	}
+</script>
+Enter Name :<input type="text" id="input" onkeypress="setfunc()">
+
+</body>
+</html>

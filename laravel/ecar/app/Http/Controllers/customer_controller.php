@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Mail\welcomemail;
 use App\Models\countrie;
 use App\Models\customer;
+use Mail;
 use Hash;
 use Session;
-Use Mail; 
+
 
 class customer_controller extends Controller
 {
@@ -66,7 +67,7 @@ class customer_controller extends Controller
 		
 		$data=$request->validate([
 			'name' => 'required|alpha',
-			'username' => 'required|alpha|unique:customers',
+			'username' => 'required|email|unique:customers',
 			'pass' => 'required|min:3|max:12',
 			'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
 		]);
@@ -74,46 +75,30 @@ class customer_controller extends Controller
 		
         $data=new customer;
 	$name=$data->name=$request->name;
-	$to=$data->username=$request->username;
+	$email=$data->username=$request->username;
 		$data->pass=Hash::make($request->pass);
 		$data->gen=$request->gen;
 		$data->lag=implode(",",$request->lag);
 		
 		// img upload
 		$file=$request->file('img');  // get file
-		$file_name=time() . "_img." . $request->file('img')->getClientOriginalExtension();// make file name
+		$file_name=time()."_img.".$request->file('img')->getClientOriginalExtension();// make file name
 		$file->move('upload/customer',$file_name); //file name move upload in public		
 		$data->img=$file_name; // file name store in db
 		
 		$data->cid=$request->cid;
-
-		
-			$maildata=[
-				'name'=>$name,
-				'to'=>$to,
-				'sub'=>"Welcome to Tops Technologies",
-				'body'=>"Welcome to Tops Technologies : ".$name,
-				'from_email'=>"vishvunjiya3058822@gmail.com",
-				'from_name'=>"Tops Technologies"
-			];
-			if($res=$data->save())  
-			{
-				Mail::send('Frontend.signup',$maildata,function($messages) use ($maildata){
-				$messages->to($maildata['to']); // to email
-				$messages->from($maildata['from_email'],$maildata['from_name']);
-				$messages->subject($maildata['sub']); // to email
-				});
-				return back()->with('success','Register Success');
-			}  
-			else
-			{
-				?>
-				<script>
-					alert('login failed');
-				</script>
-				<?php
-			}
-		
+		$res=$data->save();
+		if($res)
+		{
+			$details=['title'=>$email,'comment'=>"Welcome Mail"];
+	   
+			Mail::to($email)->send(new welcomemail($details));
+			return back()->with("success","Register Success");
+		}
+		else
+		{
+			alert("Not success");
+		}
 		
     }
 

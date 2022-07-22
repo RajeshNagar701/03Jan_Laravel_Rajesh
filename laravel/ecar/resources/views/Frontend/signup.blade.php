@@ -26,13 +26,16 @@
 							
 							<br>
 							<input type="text" name="username" placeholder="User Name:" class="form-control" />
-							@error('name')
+							@error('username')
 								<br>
 								<div class="alert alert-danger">{{ $message }}</div>
 							@enderror
 							<br>
 							<input type="password" name="pass" placeholder="Password:" class="form-control" />
-							
+							@error('pass')
+								<br>
+								<div class="alert alert-danger">{{ $message }}</div>
+							@enderror
 							<br>
 							<b>Gender:</b>
 							<br>

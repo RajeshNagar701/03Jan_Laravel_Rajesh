@@ -7,10 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifyMail extends Mailable
+class welcomemail extends Mailable
 {
     use Queueable, SerializesModels;
-
+	
 	public $details;
 	
     /**
@@ -18,9 +18,9 @@ class NotifyMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        $this->details =$details;
+        $this->details=$details;
     }
 
     /**
@@ -30,6 +30,6 @@ class NotifyMail extends Mailable
      */
     public function build()
     {
-        return $this->view('Frontend.signup');
+        return $this->subject('Tops Technlogies')->view('Frontend.welcome_view');
     }
 }

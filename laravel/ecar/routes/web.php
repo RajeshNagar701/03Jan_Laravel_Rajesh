@@ -64,7 +64,7 @@ Route::get('/login',[customer_controller::class,'login'])->middleware('beforelog
 Route::post('/userlogin',[customer_controller::class,'userlogin']);
 Route::get('/logout',[customer_controller::class,'logout']);
 
-Route::get('/signup',[customer_controller::class,'create'])->middleware('beforelogin');
+Route::get('/signup',[customer_controller::class,'create']);
 Route::post('/signup',[customer_controller::class,'store']);
 
 Route::get('/myaccount',[customer_controller::class,'myaccount'])->middleware('afterlogin');

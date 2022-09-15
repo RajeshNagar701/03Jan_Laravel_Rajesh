@@ -15,21 +15,17 @@
 
 <div class="container mt-3">
   <h2>Send Email</h2>
+  @if(session('userses'))
+	<h3 style="color:green">{{session('Success')}} </h3>
+  @endif
+
   <form method="post" action="{{url('/send_mail')}}">
 	@csrf
     <div class="mb-3 mt-3">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
     </div>
-    <div class="mb-3">
-      <label for="pwd">Subject:</label>
-      <input type="text" class="form-control" id="pwd" placeholder="Enter Subject" name="subject">
-    </div>
-	
-	 <div class="mb-3">
-      <label for="pwd">Comment:</label>
-      <textarea class="form-control" placeholder="Enter Comment" name="comment"></textarea>
-    </div>
+    
   
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

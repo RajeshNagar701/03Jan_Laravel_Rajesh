@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\Sendmail;
 use Illuminate\Http\Request;
 use Mail;
-
+use Exception;
 
 class email_controller extends Controller
 {
@@ -20,12 +20,38 @@ class email_controller extends Controller
 	
 	public function send(Request $request)
     {
-       $email=$request->email;
-	   $subject=$request->subject;
-	   $comment=$request->comment;
-	   $details=['title'=>$email,'comment'=>$comment];
+		
+	  
+		/*	   
+	   if (filter_var($email, FILTER_VALIDATE_EMAIL)) 
+	   {
+			echo $emails;
+	   } 
+	   else 
+	   {
+		echo("$email is not a valid email address");
+	   }
+		*/
+		/*
+		
+		try {
+			
+		} catch (Exception $e) {
+			return redirect('/');
+		}
+		*/
+       
+	    $email=$request->email;
+		
+	   $otp=rand(111111,999999);
+	   $request->session()->put('otp',$otp);
+
 	   
-	   Mail::to($email)->send(new Sendmail($details));
+	   $data=['otp'=>session('otp'),'body'=>"For booking confirm OTP fist "];
+	   
+	   Mail::to($email)->send(new Sendmail($data));
+	   
+	   return back()->with('Success', 'Mail send Success');
 	  
     }
 	

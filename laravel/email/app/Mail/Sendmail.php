@@ -16,11 +16,11 @@ class Sendmail extends Mailable
      *
      * @return void
      */
-	 public $details;
+	 public $data;
 	
-    public function __construct($details)
+    public function __construct($data)
     {
-		$this->details=$details;
+		$this->data=$data;
     }
 
     /**
@@ -30,6 +30,16 @@ class Sendmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('mail from raj')->view('welcome');
+		//$address = 'janeexampexample@example.com';
+        $subject = 'This is a demo!';
+        $name = 'Tops Technologies';
+
+        return $this->view('emails.welcomeTemp')
+                    /*->from($address, $name)
+                    ->cc($address, $name)
+                    ->bcc($address, $name)
+                    ->replyTo($address, $name)*/
+                    ->subject($subject)
+                    ->with([ 'test_otp' => $this->data['otp'],'body'=>$this->data['body'] ]);
     }
 }
